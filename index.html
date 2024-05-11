@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        background-color: pink;
+        padding-top: 200px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+    }
+
+    .wrapper {
+        height: 300px;
+        width: 600px;
+        background-color: #ff4583;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        z-index: 0;
+    }
+
+    .lid {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-right: 300px solid transparent;
+        border-left: 300px solid transparent;
+        border-bottom: 100px solid transparent;
+        transform-origin: top;
+        transition: transform 0.25s linear;
+    }
+
+    /* Lid when closed */
+    .lid.one {
+        border-top: 150px solid #ff3377;
+        transform: rotateX(0deg);
+        z-index: 3;
+        transition-delay: 0.75s;
+    }
+
+    /* Lid when opened */
+    .lid.two {
+        border-top: 150px solid #ff3388;
+        transform: rotateX(90deg);
+        z-index: 1;
+        transition-delay: 0.5s;
+    }
+
+    .envelope {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-top: 150px solid transparent;
+        border-right: 300px solid #ff99bb;
+        border-bottom: 150px solid #ff99bb;
+        border-left: 300px solid #ff6699;
+        z-index: 3;
+    }
+
+    .letter {
+        position: absolute;
+        width: 90%;
+        height: 100%;
+        background-color: white;
+        border-radius: 15px;
+        z-index: 2;
+        transition: 0.5s;
+        padding: 10px;
+    }
+
+    .letter p {
+        text-align: center;
+        font-size: 13px;
+        color: #3B4049;
+        padding: 10px;
+    }
+
+    .letter h1 {
+        font-size: 20px;
+    }
+
+    .wrapper.clicked .lid.one {
+        transform: rotateX(90deg);
+        transition-delay: 0s;
+    }
+
+    .wrapper.clicked .lid.two {
+        transform: rotateX(180deg);
+        transition-delay: 0.25s;
+    }
+
+    .wrapper.clicked .letter {
+        transform: translateY(-230px);
+        transition-delay: 0.5s;
+    }
+
+    button {
+        height: 30px;
+        width: 300px;
+        margin-top: 10px;
+        border: 2px solid #ff3377;
+        border-radius: 10px;
+        background-color: #ff6699;
+        color: white;
+        font-weight: bold;
+    }
+
+    @media screen and (max-width: 800px) {
+        body {
+            padding-top: 0px;
+        }
+    }
+    .next {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+        }
+</style>
+
+<body>
+    <div class="container">
+        <a href="https://shinzhei.github.io/open/" class="next">
+            <p>Next</p>
+        </a>
+        <div class="wrapper">
+            <div class="lid one"></div>
+            <div class="lid two"></div>
+            <div class="envelope"></div>
+            <div class="letter">
+                <a href="https://open.spotify.com/playlist/7CJ993YlGcxbb8e7dYPJwW?si=eKRo2NwbQ8So8vAjwbYIbw&pi=a-7J_1R8UvQ2Cb">
+                    <h1>Playlist I made 4u </h1>
+                </a>
+                <p>" Nabihag ng iyong tingin, liwanag sa dilim. Lahat ng ilaw ay nakatutok, oh-oh-oh. Sa 'yo lang tumibok, oh-oh-oh.
+                    Nang ganito ang puso ko, hindi na lalayo, oh-oh-oh, sa ' yo" - Mananatili</p>
+
+                    <p>"Ikaw lang ang nakikita ng bulag kong paningin.
+                        Ikaw lang ang ilaw sa dilim.
+                        Deretso lang, tingin sa hilaga.
+                        Abot-tanaw ang iyong hiwaga.
+                        Timog, silangan, at kanluran.
+                        Ikaw pa rin ang patutunguhan" - Patutunguhan
+                    </p>
+                    <p>
+                        "Ika'y aking nakita, 'kala ko namalikmata.
+                        Sa wakas, nahanap ko'ng hinahangad ng aking puso.
+                        Ito na ang segundo, 'di ko na palilipasin.
+                        Pilit na hahabulin.
+                        Wala nang hininga, ako'y nanghihina.
+                        Pero 'di alintana.
+                        Oh, kahit ako'y matapilok, tuloy pa rin ang pagtibok.
+                        Ng puso kong sinisigaw pangalan mo.
+                        Huminto na at 'wag lalayo, oh, oh, oh" - Sinderala</p>
+            </div>
+        </div>
+        <button id="open">Open</button>
+    </div>
+    <audio id="sound" src="estranghero.mp3"></audio>
+    <script>
+        document.onclick = function () {
+            let wrapper = document.querySelector('.wrapper');
+            let button = document.getElementById('open');
+            let audio = document.getElementById('sound');
+
+            button.onclick = function () {
+                audio.currentTime = 107;
+                wrapper.classList.toggle('clicked');
+                if (button.innerHTML == "Open") {
+                    button.innerHTML = "Close";
+                    audio.play();
+                } else {
+                    button.innerHTML = "Open";
+                    audio.pause();
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
